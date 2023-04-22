@@ -115,7 +115,8 @@
             this.Text = "OpenCC.NETG";
             this.ResumeLayout(false);
             this.PerformLayout();
-
+            KeyPreview = true;
+            this.KeyDown += FormMain_KeyDown;
         }
 
         #endregion

@@ -21,67 +21,86 @@ namespace OpenCC.NET
             comboBoxSourceType.SelectedIndex = 0;
             comboBoxTargetType.SelectedIndex = 0;
         }
+        private void FormMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.SuppressKeyPress = (e.KeyData == (Keys.Control | Keys.Enter));
+            if (e.KeyData == (Keys.Control | Keys.Enter))
+            {
+                btnApply.PerformClick();
+            }
+
+        }
 
         private void btnApply_Click(object sender, EventArgs e)
         {
             int sourceType = comboBoxSourceType.SelectedIndex;
             int targetType = comboBoxTargetType.SelectedIndex;
-            if (sourceType == 0)
+            
+            switch (sourceType)
             {
-                if (targetType == 0)
-                    textBoxContent.Text = ZhConverter.HansToTW(textBoxContent.Text, checkBoxWordChange.Checked);
-                else if (targetType == 2)
-                {
-                    textBoxContent.Text = ZhConverter.HansToHant(textBoxContent.Text);
-                }
-                else if (targetType == 3)
-                {
-                    textBoxContent.Text = ZhConverter.HansToHK(textBoxContent.Text);
-                }
+                //Hans
+                case 0:
+                    switch (targetType)
+                    {
+                        case 0:
+                            textBoxContent.Text = ZhConverter.HansToTW(textBoxContent.Text, checkBoxWordChange.Checked);
+                            break;
+                        case 2:
+                            textBoxContent.Text = ZhConverter.HansToHant(textBoxContent.Text);
+                            break;
+                        case 3:
+                            textBoxContent.Text = ZhConverter.HansToHK(textBoxContent.Text);
+                            break;
+                    }
+                    break;
+                //Hant
+                case 1:
+                    switch (targetType)
+                    {
+                        case 0:
+                            textBoxContent.Text = ZhConverter.HantToTW(textBoxContent.Text, checkBoxWordChange.Checked);
+                            break;
+                        case 1:
+                            textBoxContent.Text = ZhConverter.HantToHans(textBoxContent.Text);
+                            break;
+                        case 3:
+                            textBoxContent.Text = ZhConverter.HantToHK(textBoxContent.Text);
+                            break;
+                    }
+                    break;
+                //HK
+                case 2:
+                    switch (targetType)
+                    {
+                        case 0:
+                            textBoxContent.Text = ZhConverter.HansToTW(ZhConverter.HKToHans(textBoxContent.Text));
+                            break;
+                        case 1:
+                            textBoxContent.Text = ZhConverter.HKToHans(textBoxContent.Text);
+                            break;
+                        case 2:
+                            textBoxContent.Text = ZhConverter.HKToHans(textBoxContent.Text);
+                            break;
+                    }
+                    break;
+                //TW
+                case 3:
+                    switch (targetType)
+                    {
+                        case 1:
+                            textBoxContent.Text = ZhConverter.TWToHans(textBoxContent.Text, checkBoxWordChange.Checked);
+                            break;
+                        case 2:
+                            textBoxContent.Text = ZhConverter.TWToHant(textBoxContent.Text, checkBoxWordChange.Checked);
+                            break;
+                        case 3:
+                            textBoxContent.Text = ZhConverter.HansToHK(ZhConverter.TWToHant(textBoxContent.Text, checkBoxWordChange.Checked));
+                            break;
+                    }
+                    break;
             }
-            else if (sourceType == 1)
-            {
-                if (targetType == 0)
-                    textBoxContent.Text = ZhConverter.HantToTW(textBoxContent.Text, checkBoxWordChange.Checked);
-                else if (targetType == 1)
-                {
-                    textBoxContent.Text = ZhConverter.HantToHans(textBoxContent.Text);
-                }
-                else if (targetType == 3)
-                {
-                    textBoxContent.Text = ZhConverter.HantToHK(textBoxContent.Text);
-                }
-            }
-            else if (sourceType == 2)
-            {
-                if (targetType == 0)
-                {
-                    textBoxContent.Text = ZhConverter.HansToTW(ZhConverter.HKToHans(textBoxContent.Text));
-                }
-                else if (targetType == 1)
-                {
-                    textBoxContent.Text = ZhConverter.HKToHans(textBoxContent.Text);
-                }
-                else if (targetType == 2)
-                {
-                    textBoxContent.Text = ZhConverter.HKToHans(textBoxContent.Text);
-                }
-            }
-            else if (sourceType == 3)
-            {
-                if (targetType == 1)
-                {
-                    textBoxContent.Text = ZhConverter.TWToHans(textBoxContent.Text, checkBoxWordChange.Checked);
-                }
-                else if (targetType == 2)
-                {
-                    textBoxContent.Text = ZhConverter.TWToHant(textBoxContent.Text, checkBoxWordChange.Checked);
-                }
-                else if (targetType == 3)
-                {
-                    textBoxContent.Text = ZhConverter.HansToHK(ZhConverter.TWToHant(textBoxContent.Text, checkBoxWordChange.Checked));
-                }
-            }
+            textBoxContent.Focus();
+            textBoxContent.SelectAll();
         }
 
     }
