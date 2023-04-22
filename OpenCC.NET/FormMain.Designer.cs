@@ -43,7 +43,7 @@
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(149, 44);
             this.btnApply.TabIndex = 0;
-            this.btnApply.Text = "转换";
+            this.btnApply.Text = "转换（Ctrl + Enter）";
             this.btnApply.UseVisualStyleBackColor = true;
             this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
             // 
