@@ -6,8 +6,8 @@ namespace OpenCC.NET
     {
         public FormMain()
         {
+            //view设置
             InitializeComponent();
-            ZhConverter.Initialize();
             comboBoxSourceType.Items.AddRange(new object[] {
             "简体中文",
             "繁体中文",
@@ -20,14 +20,18 @@ namespace OpenCC.NET
             "繁体中文（香港）"});
             comboBoxSourceType.SelectedIndex = 0;
             comboBoxTargetType.SelectedIndex = 0;
+
+            //controller设置
+            KeyPreview = true;
+            this.KeyDown += FormMain_KeyDown;
+            ZhConverter.Initialize();
+
         }
         private void FormMain_KeyDown(object sender, KeyEventArgs e)
         {
             e.SuppressKeyPress = (e.KeyData == (Keys.Control | Keys.Enter));
             if (e.KeyData == (Keys.Control | Keys.Enter))
-            {
-                btnApply.PerformClick();
-            }
+            { btnApply.PerformClick(); }
 
         }
 
@@ -35,7 +39,7 @@ namespace OpenCC.NET
         {
             int sourceType = comboBoxSourceType.SelectedIndex;
             int targetType = comboBoxTargetType.SelectedIndex;
-            
+
             switch (sourceType)
             {
                 //Hans
@@ -101,6 +105,8 @@ namespace OpenCC.NET
             }
             textBoxContent.Focus();
             textBoxContent.SelectAll();
+            if (checkBoxCopy.Checked)
+            { Clipboard.SetDataObject(textBoxContent.Text); }
         }
 
     }
