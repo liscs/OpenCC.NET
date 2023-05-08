@@ -130,6 +130,18 @@
   <data name="comboBoxSourceType.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
+  <data name="comboBoxSourceType.Items" xml:space="preserve">
+    <value>简体中文</value>
+  </data>
+  <data name="comboBoxSourceType.Items1" xml:space="preserve">
+    <value>繁体中文</value>
+  </data>
+  <data name="comboBoxSourceType.Items2" xml:space="preserve">
+    <value>繁体中文（香港）</value>
+  </data>
+  <data name="comboBoxSourceType.Items3" xml:space="preserve">
+    <value>繁体中文（台湾）</value>
+  </data>
   <data name="comboBoxSourceType.Location" type="System.Drawing.Point, System.Drawing">
     <value>32, 234</value>
   </data>
@@ -156,6 +168,18 @@
   </data>
   <data name="comboBoxTargetType.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
+  </data>
+  <data name="comboBoxTargetType.Items" xml:space="preserve">
+    <value>简体中文</value>
+  </data>
+  <data name="comboBoxTargetType.Items1" xml:space="preserve">
+    <value>繁体中文</value>
+  </data>
+  <data name="comboBoxTargetType.Items2" xml:space="preserve">
+    <value>繁体中文（香港）</value>
+  </data>
+  <data name="comboBoxTargetType.Items3" xml:space="preserve">
+    <value>繁体中文（台湾）</value>
   </data>
   <data name="comboBoxTargetType.Location" type="System.Drawing.Point, System.Drawing">
     <value>32, 272</value>

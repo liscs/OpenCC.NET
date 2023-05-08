@@ -42,7 +42,7 @@
             resources.ApplyResources(this.btnApply, "btnApply");
             this.btnApply.Name = "btnApply";
             this.btnApply.UseVisualStyleBackColor = true;
-            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
+            this.btnApply.Click += new System.EventHandler(this.BtnApply_Click);
             // 
             // textBoxContent
             // 
@@ -55,14 +55,26 @@
             resources.ApplyResources(this.comboBoxSourceType, "comboBoxSourceType");
             this.comboBoxSourceType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSourceType.FormattingEnabled = true;
+            this.comboBoxSourceType.Items.AddRange(new object[] {
+            resources.GetString("comboBoxSourceType.Items"),
+            resources.GetString("comboBoxSourceType.Items1"),
+            resources.GetString("comboBoxSourceType.Items2"),
+            resources.GetString("comboBoxSourceType.Items3")});
             this.comboBoxSourceType.Name = "comboBoxSourceType";
+            this.comboBoxSourceType.SelectedIndexChanged += new System.EventHandler(this.SettingsChanged);
             // 
             // comboBoxTargetType
             // 
             resources.ApplyResources(this.comboBoxTargetType, "comboBoxTargetType");
             this.comboBoxTargetType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxTargetType.FormattingEnabled = true;
+            this.comboBoxTargetType.Items.AddRange(new object[] {
+            resources.GetString("comboBoxTargetType.Items"),
+            resources.GetString("comboBoxTargetType.Items1"),
+            resources.GetString("comboBoxTargetType.Items2"),
+            resources.GetString("comboBoxTargetType.Items3")});
             this.comboBoxTargetType.Name = "comboBoxTargetType";
+            this.comboBoxTargetType.SelectedIndexChanged += new System.EventHandler(this.SettingsChanged);
             // 
             // checkBoxWordChange
             // 
@@ -71,6 +83,7 @@
             this.checkBoxWordChange.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxWordChange.Name = "checkBoxWordChange";
             this.checkBoxWordChange.UseVisualStyleBackColor = true;
+            this.checkBoxWordChange.CheckedChanged += new System.EventHandler(this.SettingsChanged);
             // 
             // checkBoxCopy
             // 
@@ -79,6 +92,7 @@
             this.checkBoxCopy.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxCopy.Name = "checkBoxCopy";
             this.checkBoxCopy.UseVisualStyleBackColor = true;
+            this.checkBoxCopy.CheckedChanged += new System.EventHandler(this.SettingsChanged);
             // 
             // FormMain
             // 
