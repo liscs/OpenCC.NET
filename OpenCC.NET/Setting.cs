@@ -5,29 +5,32 @@ namespace OpenCC.NET
 {
     internal class Setting
     {
-        //Constructor
+        //构造方法
         private Setting()
         {
-            //default setting
-            this.SourceType = "s";
-            this.TargetType = "tw";
-            this.EnableWordChange = true;
-            this.EnableCopyToClip = true;
-            this.positionX = 100;
-            this.positionY = 100;
+            //默认设置
+            SourceType = "s";
+            TargetType = "tw";
+            EnableWordChange = true;
+            EnableCopyToClip = true;
+            PositionX = 100;
+            PositionY = 100;
+            SizeX = 773;
+            SizeY = 535;
         }
-        private Setting(string sourceType, string targetType, bool enableWordChange, bool enableCopyToClip,
-            int positionX, int positionY)
+        private Setting(
+            string sourceType, string targetType,
+            bool enableWordChange, bool enableCopyToClip,
+            int positionX, int positionY,
+            int sizeX, int sizeY)
         {
-            this.SourceType = sourceType;
-            this.TargetType = targetType;
-            this.EnableWordChange = enableWordChange;
-            this.EnableCopyToClip = enableCopyToClip;
-            this.positionX = positionX;
-            this.positionY = positionY;
+            SourceType = sourceType; TargetType = targetType;
+            EnableWordChange = enableWordChange; EnableCopyToClip = enableCopyToClip;
+            PositionX = positionX; PositionY = positionY;
+            SizeX = sizeX; SizeY = sizeY;
         }
 
-        //Singleton
+        //单例
         private static Setting? _instance;
         private static readonly object _lock = new();
         public static Setting GetInstance()
@@ -44,8 +47,11 @@ namespace OpenCC.NET
             }
             return _instance;
         }
-        public static Setting GetInstance(string sourceType, string targetType, bool enableWordChange, bool enableCopyToClip,
-            int positionX, int positionY)
+        public static Setting GetInstance(
+            string sourceType, string targetType,
+            bool enableWordChange, bool enableCopyToClip,
+            int positionX, int positionY,
+            int sizeX, int sizeY)
         {
             if (_instance == null)
             {
@@ -53,7 +59,10 @@ namespace OpenCC.NET
                 {
                     if (_instance == null)
                     {
-                        _instance = new Setting(sourceType, targetType, enableWordChange, enableCopyToClip, positionX, positionY);
+                        _instance = new Setting(
+                            sourceType, targetType,
+                            enableWordChange, enableCopyToClip,
+                            positionX, positionY, sizeX, sizeY);
                     }
                 }
             }
@@ -63,20 +72,24 @@ namespace OpenCC.NET
                 _instance.TargetType = targetType;
                 _instance.EnableWordChange = enableWordChange;
                 _instance.EnableCopyToClip = enableCopyToClip;
-                _instance.positionX = positionX; 
-                _instance.positionY = positionY;
+                _instance.PositionX = positionX;
+                _instance.PositionY = positionY;
+                _instance.SizeX = sizeX;
+                _instance.SizeY = sizeY;
             }
             return _instance;
         }
 
-        //Attribute
+        //属性
         public string SourceType { get; set; }
         public string TargetType { get; set; }
         public bool EnableWordChange { get; set; }
         public bool EnableCopyToClip { get; set; }
-        public int positionX { get; set; }
-        public int positionY { get; set; }
-        //Method
+        public int PositionX { get; set; }
+        public int PositionY { get; set; }
+        public int SizeX { get; set; }
+        public int SizeY { get; set; }
+        //方法
         //instance to file
         public async Task SaveAsync()
         {
@@ -86,7 +99,7 @@ namespace OpenCC.NET
             await createStream.DisposeAsync();
         }
         //file to instance
-        public void Load()
+        public Setting Load()
         {
             string fileName = "setting.json";
             if (!File.Exists(fileName))
@@ -95,9 +108,11 @@ namespace OpenCC.NET
             }
             string jsonString = File.ReadAllText(fileName);
             JObject jo = JObject.Parse(jsonString);
-            GetInstance(jo[nameof(SourceType)]!.ToString(), jo[nameof(TargetType)]!.ToString(),
-                (bool)jo[nameof(EnableWordChange)]!, (bool)jo[nameof(EnableCopyToClip)]!,
-                (int)jo[nameof(positionX)]!, (int)jo[nameof(positionY)]!);
+            return GetInstance(
+                  jo[nameof(SourceType)]!.ToString(), jo[nameof(TargetType)]!.ToString(),
+                  (bool)jo[nameof(EnableWordChange)]!, (bool)jo[nameof(EnableCopyToClip)]!,
+                  (int)jo[nameof(PositionX)]!, (int)jo[nameof(PositionY)]!,
+                  (int)jo[nameof(SizeX)]!, (int)jo[nameof(SizeY)]!);
         }
     }
 }

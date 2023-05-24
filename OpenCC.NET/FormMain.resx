@@ -63,7 +63,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnApply.Location" type="System.Drawing.Point, System.Drawing">
-    <value>278, 357</value>
+    <value>278, 362</value>
   </data>
   <data name="btnApply.Size" type="System.Drawing.Size, System.Drawing">
     <value>234, 62</value>
@@ -103,7 +103,7 @@
     <value>Vertical</value>
   </data>
   <data name="textBoxContent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>730, 275</value>
+    <value>720, 280</value>
   </data>
   <data name="textBoxContent.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -136,7 +136,7 @@
     <value>繁体中文（台湾）</value>
   </data>
   <data name="comboBoxSourceType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>50, 330</value>
+    <value>50, 335</value>
   </data>
   <data name="comboBoxSourceType.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 32</value>
@@ -172,7 +172,7 @@
     <value>繁体中文（台湾）</value>
   </data>
   <data name="comboBoxTargetType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>50, 384</value>
+    <value>50, 389</value>
   </data>
   <data name="comboBoxTargetType.Size" type="System.Drawing.Size, System.Drawing">
     <value>182, 32</value>
@@ -199,7 +199,7 @@
     <value>True</value>
   </data>
   <data name="checkBoxWordChange.Location" type="System.Drawing.Point, System.Drawing">
-    <value>116, 427</value>
+    <value>116, 432</value>
   </data>
   <data name="checkBoxWordChange.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 28</value>
@@ -226,7 +226,7 @@
     <value>Bottom, Left</value>
   </data>
   <data name="checkBoxCopy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>520, 373</value>
+    <value>520, 378</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="checkBoxCopy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
@@ -260,7 +260,7 @@
     <value>11, 24</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>761, 474</value>
+    <value>751, 479</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

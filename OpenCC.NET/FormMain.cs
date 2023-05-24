@@ -5,7 +5,7 @@ namespace OpenCC.NET
 {
     public partial class FormMain : Form
     {
-        bool settingUpdateLock = false;
+        bool SettingUpdateLock = false;
         public FormMain()
         {
             //view设置
@@ -19,10 +19,15 @@ namespace OpenCC.NET
             ZhConverter.Initialize();
 
             //读取setting文件
-            Setting setting = Setting.GetInstance();
-            setting.Load();
-            setting = Setting.GetInstance();
+            Setting.GetInstance().Load();
             //应用setting文件
+            ApplySetting(Setting.GetInstance());
+            SettingUpdateLock = true;
+        }
+
+
+        private void ApplySetting(Setting setting)
+        {
             switch (setting.SourceType)
             {
                 case "s":
@@ -55,9 +60,10 @@ namespace OpenCC.NET
             }
             checkBoxWordChange.Checked = setting.EnableWordChange;
             checkBoxCopy.Checked = setting.EnableCopyToClip;
-            this.Left = setting.positionX;
-            this.Top = setting.positionY;
-            settingUpdateLock = true;
+            Left = setting.PositionX;
+            Top = setting.PositionY;
+            Width = setting.SizeX;
+            Height = setting.SizeY;
         }
 
         //快捷键
@@ -146,7 +152,7 @@ namespace OpenCC.NET
         //界面设置修改
         private void SettingsChanged(object sender, EventArgs e)
         {
-            if (settingUpdateLock)
+            if (SettingUpdateLock)
             {
                 Setting setting = Setting.GetInstance();
                 string UiSourceType = "s";
@@ -185,9 +191,14 @@ namespace OpenCC.NET
                 }
                 bool UiEnableWordChange = checkBoxWordChange.Checked;
                 bool UienableCopyToClip = checkBoxCopy.Checked;
-                int UiPositionX = this.Left;
-                int UiPositionY = this.Top;
-                Setting.GetInstance(UiSourceType, UiTargetType, UiEnableWordChange, UienableCopyToClip, UiPositionX, UiPositionY);
+                int UiPositionX = Left;
+                int UiPositionY = Top;
+                int UiSizeX = Width;
+                int UiSizeY = Height;
+                Setting.GetInstance(
+                    UiSourceType, UiTargetType,
+                    UiEnableWordChange, UienableCopyToClip,
+                    UiPositionX, UiPositionY, UiSizeX, UiSizeY);
                 _ = setting.SaveAsync();
             }
         }
@@ -198,18 +209,19 @@ namespace OpenCC.NET
             Icon lightIcon = Properties.Resources.LightIcon;
             if (SystemThemeInfo.SystemUsesLightTheme())
             {
-                this.Icon = darkIcon;
+                Icon = darkIcon;
             }
             else
             {
-                this.Icon = lightIcon;
+                Icon = lightIcon;
             }
+            //TODO 应用与系统主题不同时的icon处理
             if (SystemThemeInfo.AppsUseLightTheme() ^ SystemThemeInfo.SystemUsesLightTheme())
             {
             }
             else
             {
-                
+
             }
         }
     }

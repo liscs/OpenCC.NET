@@ -106,7 +106,7 @@
             this.Controls.Add(this.btnApply);
             this.KeyPreview = true;
             this.Name = "FormMain";
-            this.Move += new System.EventHandler(this.SettingsChanged);
+            this.ResizeEnd += new System.EventHandler(this.SettingsChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 
