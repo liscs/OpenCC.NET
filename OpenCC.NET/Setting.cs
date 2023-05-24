@@ -13,13 +13,18 @@ namespace OpenCC.NET
             this.TargetType = "tw";
             this.EnableWordChange = true;
             this.EnableCopyToClip = true;
+            this.positionX = 100;
+            this.positionY = 100;
         }
-        private Setting(string sourceType, string targetType, bool enableWordChange, bool enableCopyToClip)
+        private Setting(string sourceType, string targetType, bool enableWordChange, bool enableCopyToClip,
+            int positionX, int positionY)
         {
             this.SourceType = sourceType;
             this.TargetType = targetType;
             this.EnableWordChange = enableWordChange;
             this.EnableCopyToClip = enableCopyToClip;
+            this.positionX = positionX;
+            this.positionY = positionY;
         }
 
         //Singleton
@@ -39,7 +44,8 @@ namespace OpenCC.NET
             }
             return _instance;
         }
-        public static Setting GetInstance(string sourceType, string targetType, bool enableWordChange, bool enableCopyToClip)
+        public static Setting GetInstance(string sourceType, string targetType, bool enableWordChange, bool enableCopyToClip,
+            int positionX, int positionY)
         {
             if (_instance == null)
             {
@@ -47,7 +53,7 @@ namespace OpenCC.NET
                 {
                     if (_instance == null)
                     {
-                        _instance = new Setting(sourceType, targetType, enableWordChange, enableCopyToClip);
+                        _instance = new Setting(sourceType, targetType, enableWordChange, enableCopyToClip, positionX, positionY);
                     }
                 }
             }
@@ -57,6 +63,8 @@ namespace OpenCC.NET
                 _instance.TargetType = targetType;
                 _instance.EnableWordChange = enableWordChange;
                 _instance.EnableCopyToClip = enableCopyToClip;
+                _instance.positionX = positionX; 
+                _instance.positionY = positionY;
             }
             return _instance;
         }
@@ -66,7 +74,8 @@ namespace OpenCC.NET
         public string TargetType { get; set; }
         public bool EnableWordChange { get; set; }
         public bool EnableCopyToClip { get; set; }
-
+        public int positionX { get; set; }
+        public int positionY { get; set; }
         //Method
         //instance to file
         public async Task SaveAsync()
@@ -87,7 +96,8 @@ namespace OpenCC.NET
             string jsonString = File.ReadAllText(fileName);
             JObject jo = JObject.Parse(jsonString);
             GetInstance(jo[nameof(SourceType)]!.ToString(), jo[nameof(TargetType)]!.ToString(),
-                (bool)jo[nameof(EnableWordChange)]!, (bool)jo[nameof(EnableCopyToClip)]!);
+                (bool)jo[nameof(EnableWordChange)]!, (bool)jo[nameof(EnableCopyToClip)]!,
+                (int)jo[nameof(positionX)]!, (int)jo[nameof(positionY)]!);
         }
     }
 }

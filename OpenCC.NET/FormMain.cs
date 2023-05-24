@@ -1,4 +1,5 @@
 using OpenCCNET;
+using System.Windows.Forms;
 
 namespace OpenCC.NET
 {
@@ -9,10 +10,12 @@ namespace OpenCC.NET
         {
             //view设置
             InitializeComponent();
+            ApplyIconAccordingToTheme();
 
             //controller设置
-            KeyPreview = true;
             KeyDown += FormMain_KeyDown;
+
+            //model設置
             ZhConverter.Initialize();
 
             //读取setting文件
@@ -52,6 +55,8 @@ namespace OpenCC.NET
             }
             checkBoxWordChange.Checked = setting.EnableWordChange;
             checkBoxCopy.Checked = setting.EnableCopyToClip;
+            this.Left = setting.positionX;
+            this.Top = setting.positionY;
             settingUpdateLock = true;
         }
 
@@ -180,8 +185,31 @@ namespace OpenCC.NET
                 }
                 bool UiEnableWordChange = checkBoxWordChange.Checked;
                 bool UienableCopyToClip = checkBoxCopy.Checked;
-                Setting.GetInstance(UiSourceType, UiTargetType, UiEnableWordChange, UienableCopyToClip);
+                int UiPositionX = this.Left;
+                int UiPositionY = this.Top;
+                Setting.GetInstance(UiSourceType, UiTargetType, UiEnableWordChange, UienableCopyToClip, UiPositionX, UiPositionY);
                 _ = setting.SaveAsync();
+            }
+        }
+
+        private void ApplyIconAccordingToTheme()
+        {
+            Icon darkIcon = Properties.Resources.DarkIcon;
+            Icon lightIcon = Properties.Resources.LightIcon;
+            if (SystemThemeInfo.SystemUsesLightTheme())
+            {
+                this.Icon = darkIcon;
+            }
+            else
+            {
+                this.Icon = lightIcon;
+            }
+            if (SystemThemeInfo.AppsUseLightTheme() ^ SystemThemeInfo.SystemUsesLightTheme())
+            {
+            }
+            else
+            {
+                
             }
         }
     }
